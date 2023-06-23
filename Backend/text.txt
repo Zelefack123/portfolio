@@ -1,0 +1,8 @@
+username:zelefackmarie858
+password:TAlbOTltv87cSBCj
+mongodb+srv://zelefackmarie858:TAlbOTltv87cSBCj@reactbackendportfolio.b8jdmoq.mongodb.net/
+
+
+
+
+mongodb+srv://zelefackmarie858:TAlbOTltv87cSBCj@reactbackendportfolio.b8jdmoq.mongodb.net/?retryWrites=true&w=majority
