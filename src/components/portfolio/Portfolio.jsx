@@ -1,124 +1,63 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./portfolio.css";
-import IMGI from '../../assets/portfolio1.jpeg'
-import IMGI1 from '../../assets/images.jpeg'
-import IMGI2 from '../../assets/portfolio2.jpeg'
-import IMGI3 from '../../assets/portfolio3.jpeg'
-import IMGI4 from '../../assets/portfolio4.jpeg'
-import IMGI5 from "../../assets/portfolio6.jpeg";
+
+
 
 
 const Portfolio = () => {
-    return (
-      <section id="portfolio">
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://combative-moth-baseball-cap.cyclic.app/api/portfolio")
+      .then((response) => {
+        const formattedData = response.data.data.map((item) => ({
+          id: item._id,
+          image: item.image,
+          title: item.title,
+          github: item.github,
+          demo: item.demo,
+        }));
+        setData(formattedData);
+      })
+      .catch((error) => {
+        console.log("error fetching portfolio data:", error);
+      });
+  }, []);
+
+  return (
+
+    <section id="portfolio">
         <h5>My Recent Work</h5>
         <h2>Porfolio</h2>
 
         <div className="container portfolio__container">
-          <article className="portfolio__item">
+          
+            
+            {
+              data.map(({ id, image, title, github, demo }) => (
+          <article key={id} className="portfolio__item">
             <div className="portfolio__item-image">
-              <img src={IMGI} alt="porfolio" />
-              <h3>This is a portfolio item title</h3>
-              <div className=".portfolio__item-cta">
-                <a href="https://github.com" className="btn">
+              <img src={image} alt={title} />
+            </div> 
+            <h3>{title}</h3> 
+            <div className=".portfolio__item-cta">
+                <a href={github} className="btn">
                   Github
                 </a>
                 <a
-                  href="https://dribble.com/Alien_pixels"
+                  href={demo}
                   className="btn btn-primary"
                 >
                   Live Demo
                 </a>
               </div>
-            </div>
-          </article>
-          <article className="portfolio__item">
-            <div className="portfolio__item-image">
-              <img src={IMGI1} alt="porfolio" />
-              <h3>This is a portfolio item title</h3>
-              <div className=".portfolio__item-cta">
-                <a href="https://github.com" className="btn">
-                  Github
-                </a>
-                <a
-                  href="https://dribble.com/Alien_pixels"
-                  className="btn btn-primary"
-                >
-                  Live Demo
-                </a>
-              </div>
-            </div>
-          </article>
-          <article className="portfolio__item">
-            <div className="portfolio__item-image">
-              <img src={IMGI2} alt="porfolio" />
-              <h3>This is a portfolio item title</h3>
-              <div className=".portfolio__item-cta">
-                <a href="https://github.com" className="btn">
-                  Github
-                </a>
-                <a
-                  href="https://dribble.com/Alien_pixels"
-                  className="btn btn-primary"
-                >
-                  Live Demo
-                </a>
-              </div>
-            </div>
-          </article>
-          <article className="portfolio__item">
-            <div className="portfolio__item-image">
-              <img src={IMGI3} alt="porfolio" />
-              <h3>This is a portfolio item title</h3>
-              <div className=".portfolio__item-cta">
-                <a href="https://github.com" className="btn">
-                  Github
-                </a>
-                <a
-                  href="https://dribble.com/Alien_pixels"
-                  className="btn btn-primary"
-                >
-                  Live Demo
-                </a>
-              </div>
-            </div>
-          </article>
-          <article className="portfolio__item">
-            <div className="portfolio__item-image">
-              <img src={IMGI4} alt="porfolio" />
-              <h3>This is a portfolio item title</h3>
-              <div className=".portfolio__item-cta">
-                <a href="https://github.com" className="btn">
-                  Github
-                </a>
-                <a
-                  href="https://dribble.com/Alien_pixels"
-                  className="btn btn-primary"
-                >
-                  Live Demo
-                </a>
-              </div>
-            </div>
-          </article>
-          <article className="portfolio__item">
-            <div className="portfolio__item-image">
-              <img src={IMGI5} alt="porfolio" />
-              <h3>This is a portfolio item title</h3>
-              <div className=".portfolio__item-cta">
-                <a href="https://github.com" className="btn">
-                  Github
-                </a>
-                <a
-                  href="https://dribble.com/Alien_pixels"
-                  className="btn btn-primary"
-                >
-                  Live Demo
-                </a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-    );
-}
-export default Portfolio
+              </article>
+              ))
+            }
+            </div>      
+    </section>
+  );
+};
+export default Portfolio;
