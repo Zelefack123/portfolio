@@ -9,21 +9,17 @@ const Contact = () => {
   const form = useRef();
   const sendEmail = (e) => {
     e.preventDefault();
-    emailjs.sendForm(
-      "service_rk4ou8u",
-      "template_qioe2et",
-      form.current,
-      "B877HpeGmatkTmwu3"
-    );
-    e.target.reset().then(
-      (result) => {
-        console.log(result.text);
-      },
-      (error) => {
-        console.log(error.text);
-      }
-    );
-  };
+    emailjs.sendForm("service_w6qto4k","template_js92m9h", form.current, "B877HpeGmatkTmwu3")
+    // e.target.reset()
+    // .then(
+    //   (result) => {
+    //     console.log(result.text);
+    //   },
+    //   (error) => {
+    //     console.log(error.text);
+    //   }
+    // );
+  }
   return (
     <section id="contact">
       <h5>Get in touch</h5>
